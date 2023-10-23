@@ -1,0 +1,36 @@
+<h1>Home</h1>
+<div class="form">
+    <form [formGroup]="filterForm" (ngSubmit)="search()" novalidate autocomplete="off">
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput type="text" placeholder="Product" formControlName="productName">
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-content>
+            <mat-form-field>
+                <input matInput type="text" formControlName="productCategory" [matAutocomplete] = "auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let category of filteredCategores | async" [value] = 'category.name'>
+                        {{category.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button>Search</button>
+        </mat-card-actions>
+    </form>
+</div>
+
+<div class="flex">
+  <mat-card class="example-card" *ngFor="let product of jsonData">
+    <mat-card-header>
+      <mat-card-title>{{product.name}}</mat-card-title>
+      <mat-card-subtitle>{{product.price}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <button mat-button (click) = addToCart(product) color="primary">В корзину</button>
+    </mat-card-actions>
+  </mat-card>
+  <div *ngIf="jsonData.length === 0">No data found for the specified parameter</div>
+</div>

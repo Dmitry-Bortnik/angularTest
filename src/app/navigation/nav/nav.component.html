@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/category/{{cat.id}}" *ngFor="let cat of jsonData">
+        {{cat.name}}
+    </a>
+    <span class="example-spacer"></span>
+    <button [routerLink]="'/cart'">
+
+        {{ (cartList$ | async).length }}
+        
+        <img src="./assets/img/shopping_cart_checkout_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+      </button>
+</mat-toolbar>
